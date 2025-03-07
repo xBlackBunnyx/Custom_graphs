@@ -3,6 +3,12 @@
 #' @export
 
 theme_BB = function(){
+
+  #Makes sure the library is loaded
+  library(extrafont)
+  font_import()
+  loadfonts(device = "win")
+
   font = "Segoe Print" #Font family
 
   theme_minimal() %+replace% #replace elements we are going to change
