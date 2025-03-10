@@ -2,10 +2,15 @@
 % Please edit documentation in R/custom_theme.R
 \name{theme_BB}
 \alias{theme_BB}
-\title{Custom theme for ggplot2 graphs}
+\title{Custom theme for ggplot2 and Base R graphs}
 \usage{
-theme_BB()
+theme_BB(font_family = "Shadows Into Light Two", fallback_font = "sans")
+}
+\arguments{
+\item{font_family}{The name of the font to use (default: "Shadows Into Light Two")}
+
+\item{fallback_font}{A fallback font if the specified font is unavailable (default: "sans")}
 }
 \description{
-Custom theme for ggplot2 graphs
+Custom theme for ggplot2 and Base R graphs
 }
