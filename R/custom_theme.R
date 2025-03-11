@@ -7,27 +7,30 @@
 theme_BB = function(font_family = "Shadows Into Light Two", fallback_font = "sans"){
 
   # Get a list of installed fonts
-  available_fonts = sysfonts::font_families()
+  installed_fonts = sysfonts::font_families()
 
-  # Check if font is already installed
-  if (!(font_family %in% available_fonts)) {
+  # If font is not installed, download it
+  if (!(font_family %in% installed_fonts)) {
     message(paste("Font", font_family, "not found. Trying to download from Google Fonts..."))
 
-    # Try to add the font from Google Fonts
     tryCatch(
       {
         sysfonts::font_add_google(font_family, font_family)
         message(paste("Font", font_family, "successfully added!"))
       },
       error = function(e) {
-        message(paste("Failed to download", font_family, ". Using fallback font:", fallback_font))
-        font_family <<- fallback_font  # Use fallback font if download fails
+        message(paste("Failed to download", font_family, ". Using fallback:", fallback_font))
+        font_family <<- fallback_font
       }
     )
   }
 
-  #Enable showtext globally
-  showtext::showtext_auto(enable = TRUE)
+  # Ensure a graphics device is open
+  if (dev.cur() == 1) dev.new()
+
+  # Force font loading
+  showtext::showtext_auto() # Auto-enable for ggplot
+  showtext::showtext_begin() # Apply to base R plots
 
   # Apply to base R plots
   graphics::par(
